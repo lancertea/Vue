@@ -29,7 +29,6 @@ export default {
         this.$nextTick(() => {
           // 获取 DOM 元素
           const ulElem = this.$refs.ul1
-          // eslint-disable-next-line
           console.log( ulElem.childNodes.length )
         })
     }
