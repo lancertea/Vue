@@ -4,8 +4,9 @@
     <hr />
 
     <!-- 自定义 v-model -->
-    <!-- <p>{{name}}</p>-->
-    <!-- <CustomVModel v-model="name"/>  -->
+    <p>{{name}}</p>
+    <!-- <input v-model="name"/> -->
+    <CustomVModel v-model="name"/> 
 
     <!-- nextTick -->
     <!-- <NextTick/> -->
@@ -25,8 +26,8 @@
     </div> -->
 
     <!-- 异步组件 -->
-    <FormDemo v-if="showFormDemo"/>
-    <button @click="showFormDemo = true">show form demo</button>
+    <!-- <FormDemo v-if="showFormDemo"/>
+    <button @click="showFormDemo = true">show form demo</button> -->
 
     <!-- keep-alive -->
     <!-- <KeepAlive/> -->
@@ -38,7 +39,7 @@
 
 <script>
 //同步引入
-//import CustomVModel from './CustomVModel'
+import CustomVModel from './CustomVModel'
 // import NextTick from './NextTick'
 // import SlotDemo from './SlotDemo'
 // import ScopedSlotDemo from "./ScopedSlotDemo";
@@ -47,7 +48,7 @@
 
 export default {
   components: {
-    // CustomVModel
+    CustomVModel
     // NextTick
     // SlotDemo,
     // ScopedSlotDemo,
