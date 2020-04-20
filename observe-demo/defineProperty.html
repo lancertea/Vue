@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Object.defineProperty实现响应式</title>
+    <style>
+      
+    </style>
+</head>
+
+<body>
+    
+    <script>
+     //常规用法
+      const data={}
+      const name='zhangsan'
+      Object.defineProperty(data,"name",{
+          get:function(){
+              console.log('get');
+              return name
+              
+          },
+          set:function(newVal){
+              console.log('set');
+              name=newVal
+              
+          }
+      });
+
+      console.log(data.name);//get zhangsan
+      data.name='lisi' //set
+      
+    </script>
+</body>
+
+</html>
