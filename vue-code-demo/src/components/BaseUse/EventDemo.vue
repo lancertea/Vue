@@ -15,20 +15,18 @@ export default {
     },
     methods: {
         increment1(event) {
-            // eslint-disable-next-line
-            console.log('event', event, event.__proto__.constructor) // 是原生的 event 对象
-            // eslint-disable-next-line
+            //不传参数时，event是默认有的，无需用特殊变量传入方法
+            console.log('event', event, event.__proto__.constructor) // 是原生的 event 对象       
             console.log(event.target)
-            // eslint-disable-next-line
             console.log(event.currentTarget) // 注意，事件是被注册到当前元素的，和 React 不一样
             this.num++
 
             // 1. event 是原生的
-            // 2. 事件被挂载到当前元素
+            // 2. 事件被挂载到当前元素（写v-on的地方）
             // 和 DOM 事件一样
         },
         increment2(val, event) {
-            // eslint-disable-next-line
+            //传参数时，可以用特殊变量 $event 把它传入方法
             console.log(event.target)
             this.num = this.num + val
         },
