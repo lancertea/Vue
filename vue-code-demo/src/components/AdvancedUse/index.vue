@@ -4,9 +4,9 @@
     <hr />
 
     <!-- 自定义 v-model -->
-    <p>{{name}}</p>
+    <!-- <p>{{name}}</p> -->
     <!-- <input v-model="name"/> -->
-    <CustomVModel v-model="name"/> 
+    <!-- <CustomVModel v-model="name"/>  -->
 
     <!-- nextTick -->
     <!-- <NextTick/> -->
@@ -14,7 +14,7 @@
     <!-- slot -->
     <!-- <SlotDemo :url="website.url">
             {{website.title}}
-    </SlotDemo>-->
+    </SlotDemo> -->
     <!-- <ScopedSlotDemo :url="website.url">
       <template v-slot="slotProps">{{slotProps.slotData.title}}</template>
     </ScopedSlotDemo> -->
@@ -26,8 +26,8 @@
     </div> -->
 
     <!-- 异步组件 -->
-    <!-- <FormDemo v-if="showFormDemo"/>
-    <button @click="showFormDemo = true">show form demo</button> -->
+    <FormDemo v-if="showFormDemo"/>
+    <button @click="showFormDemo = true">show form demo</button>
 
     <!-- keep-alive -->
     <!-- <KeepAlive/> -->
@@ -40,7 +40,7 @@
 <script>
 //同步引入
 import CustomVModel from './CustomVModel'
-// import NextTick from './NextTick'
+//import NextTick from './NextTick'
 // import SlotDemo from './SlotDemo'
 // import ScopedSlotDemo from "./ScopedSlotDemo";
 // import KeepAlive from './KeepAlive'
@@ -48,12 +48,12 @@ import CustomVModel from './CustomVModel'
 
 export default {
   components: {
-    CustomVModel
+    // CustomVModel
     // NextTick
     // SlotDemo,
     // ScopedSlotDemo,
-    //异步引入
-    // FormDemo: () => import('../BaseUse/FormDemo'),
+    //异步引入，注意引用位置
+    FormDemo: () => import('../BaseUse/FormDemo'),
     // KeepAlive
     // MixinDemo
   },
@@ -65,7 +65,7 @@ export default {
         title: "imooc",
         subTitle: "程序员的梦工厂"
       },
-      // NextTickName: "NextTick",
+      NextTickName: "NextTick",
       showFormDemo: false,
       newsData: {
         1: { type: "text" },
