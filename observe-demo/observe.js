@@ -7,7 +7,7 @@ function updateView() {
 const oldArrayProperty = Array.prototype
 // 创建新对象，原型指向 oldArrayProperty ，再扩展新的方法不会影响原型
 const arrProto = Object.create(oldArrayProperty);
-['push', 'pop', 'shift', 'unshift', 'splice'].forEach(methodName => {
+['push', 'pop', 'shift', 'unshift', 'splice','sort','reverse'].forEach(methodName => {
     arrProto[methodName] = function () {
         updateView() // 触发视图更新
         oldArrayProperty[methodName].call(this, ...arguments)
@@ -79,10 +79,10 @@ observer(data)
 
 // 测试
 //监听简单属性
-data.name = 'lisi'
-data.age = 21
+// data.name = 'lisi'
+// data.age = 21
 // // console.log('age', data.age)
 // data.x = '100' // 新增属性，监听不到 —— 所以有 Vue.set
 // delete data.name // 删除属性，监听不到 —— 所有已 Vue.delete
-data.info.address = '上海' // 深度监听
+// data.info.address = '上海' // 深度监听
 data.nums.push(4) // 监听数组
