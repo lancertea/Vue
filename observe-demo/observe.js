@@ -68,10 +68,10 @@ function observer(target) {
 const data = {
     name: 'zhangsan',
     age: 20,
-    // info: {
-    //     address: '北京' // 需要深度监听
-    // },
-    // nums: [10, 20, 30]
+    info: {
+        address: '北京' // 需要深度监听
+    },
+    nums: [10, 20, 30]
 }
 
 // 监听数据
@@ -84,5 +84,5 @@ data.age = 21
 // // console.log('age', data.age)
 // data.x = '100' // 新增属性，监听不到 —— 所以有 Vue.set
 // delete data.name // 删除属性，监听不到 —— 所有已 Vue.delete
-// data.info.address = '上海' // 深度监听
-// data.nums.push(4) // 监听数组
+data.info.address = '上海' // 深度监听
+data.nums.push(4) // 监听数组
