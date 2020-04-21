@@ -7,12 +7,12 @@ const template = `<p>{{message}}</p>`
 // h -> vnode
 // createElement -> vnode
 
-// // 表达式
+//  表达式  表达式内部就是本身JS代码
 // const template = `<p>{{flag ? message : 'no message found'}}</p>`
 // // with(this){return _c('p',[_v(_s(flag ? message : 'no message found'))])}
 
 // 属性后面是字符串
-//和动态属性后面是变量
+//动态属性后面是变量
 // const template = `
 //     <div id="div1" class="container">
 //         <img :src="imgUrl"/>
@@ -50,8 +50,9 @@ const template = `<p>{{message}}</p>`
 const template = `<input type="text" v-model="name">`
 // 主要看 input 事件
 // with(this){return _c('input',{directives:[{name:"model",rawName:"v-model",value:(name),
-//expression:"name"}],attrs:{"type":"text"},domProps:{"value":(name)},
+//expression:"name"}],attrs:{"type":"text"},domProps:{"value":(name)},设置变量
 //on:{"input":function($event){if($event.target.composing)return;name=$event.target.value}}})}
+// 当值改变，触发该事件，该事件会将当前的值赋值给name
 
 // render 函数
 // 返回 vnode
