@@ -289,7 +289,9 @@ export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI) {
     const hook = vnode.data?.hook;
     hook?.prepatch?.(oldVnode, vnode);
 
-    // 设置 vnode.elem 新的要覆盖旧的，但是新的要更新旧的，起码要知道自己要更新哪个元素
+    // 设置 vnode.elem 
+    //右边赋值：新的要更新旧的，起码要知道自己要更新哪个元素（DOM节点）
+    //左边赋值：新的很有可能后面也会调用patch更新（自身就变成旧的了），所以保存这个DOM节点
     const elm = vnode.elm = oldVnode.elm!;
   
     // 旧 children
