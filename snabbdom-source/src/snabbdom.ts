@@ -15,7 +15,8 @@ const emptyNode = vnode('', {}, [], undefined, undefined);
 
 function sameVnode (vnode1: VNode, vnode2: VNode): boolean {
   // key 和 sel 都相等
-  // undefined === undefined // true
+  // 都没有key的情况：undefined === undefined // true
+  //不在循环体内的不传key没关系，直接通过tag、selector比较，但v-for(循环体内要传)
   return vnode1.key === vnode2.key && vnode1.sel === vnode2.sel;
 }
 
@@ -344,7 +345,7 @@ export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI) {
 
     // 第一个参数不是 vnode
     if (!isVnode(oldVnode)) {
-      // 创建一个空的 vnode ，关联到这个 DOM 元素
+      // 创建一个空的 vnode ，关联（绑定）到这个 DOM 元素
       oldVnode = emptyNodeAt(oldVnode);
     }
 
