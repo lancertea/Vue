@@ -228,6 +228,7 @@ export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI) {
         newEndVnode = newCh[--newEndIdx];
 
       // 开始和结束对比
+      //如果旧的第一个和新的最后一个相同，就把旧的第一个插入到旧的最后一个之后
       } else if (sameVnode(oldStartVnode, newEndVnode)) { // Vnode moved right
         patchVnode(oldStartVnode, newEndVnode, insertedVnodeQueue);
         api.insertBefore(parentElm, oldStartVnode.elm!, api.nextSibling(oldEndVnode.elm!));
@@ -235,6 +236,7 @@ export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI) {
         newEndVnode = newCh[--newEndIdx];
 
       // 结束和开始对比
+      //如果旧的最后一个和新的第一个相同，就把旧的最后一个插入到旧的第一个之前
       } else if (sameVnode(oldEndVnode, newStartVnode)) { // Vnode moved left
         patchVnode(oldEndVnode, newStartVnode, insertedVnodeQueue);
         api.insertBefore(parentElm, oldEndVnode.elm!, oldStartVnode.elm!);
@@ -249,7 +251,7 @@ export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI) {
         // 拿新节点 key ，能否对应上 oldCh 中的某个节点的 key
         idxInOld = oldKeyToIdx[newStartVnode.key as string];
   
-        // 没对应上
+        // 没对应上，新建一个元素插入到旧的第一个之前
         if (isUndef(idxInOld)) { // New element
           api.insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm!);
           newStartVnode = newCh[++newStartIdx];
@@ -261,7 +263,7 @@ export function init (modules: Array<Partial<Module>>, domApi?: DOMAPI) {
 
           // sel 是否相等（sameVnode 的条件）
           if (elmToMove.sel !== newStartVnode.sel) {
-            // New element
+            // 不相等，新建一个元素插入到旧的第一个之前
             api.insertBefore(parentElm, createElm(newStartVnode, insertedVnodeQueue), oldStartVnode.elm!);
           
           // sel 相等，key 相等
