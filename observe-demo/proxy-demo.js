@@ -5,6 +5,7 @@
 const data = ['a', 'b', 'c']
 
 const proxyData = new Proxy(data, {
+//receiver就是proxyData
     get(target, key, receiver) {
         // 只处理本身（非原型的）属性
         const ownKeys = Reflect.ownKeys(target)
