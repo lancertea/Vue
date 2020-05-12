@@ -14,72 +14,32 @@
     <br>
     <input type="text" id="inpName">
     <script>
-        //vue2.0
-        // let obj = {
-        //     name: ''
+       // vue2.0
+        let obj = {
+            name: ''
 
-        // };
-        // var spanName = document.getElementById('spanName'),
-        // inpName = document.getElementById('inpName');
-        // let newObj = JSON.parse(JSON.stringify(obj));
-
-        // Object.defineProperty(obj, 'name', {
-        //     get() {
-        //         return newObj.name;
-        //     },
-        //     set(val) {
-        //         if (val === obj.name) return;
-        //         newObj.name = val;
-        //         observer();
-        //    }
-        // });
-
-
-        // function observer() {  
-        //     spanName.innerHTML = obj.name;
-        //     inpName.value = obj.name;
-        // }
-        // observer();
-
-        // setTimeout(()=>{
-        //     obj.name='zzz';
-        // },1000);
-
-        // //v-model
-        // inpName.oninput=function(){
-        //     obj.name=this.value;
-        // }
-
-        /*
-        1.需要对原始数据进行克隆
-        2.需要分别给对象中的每一个属性设置监听
-        3.新增、删除属性监听不到
-        */
-    </script>
-    <script>
-        //vue3.0
+        };
         var spanName = document.getElementById('spanName'),
         inpName = document.getElementById('inpName');
-        let obj = {};
-        obj = new Proxy(obj, {
-            //target：监听的obj本身
-            //prop:属性
-            //value：属性的值
-            get(target, prop) {
-                // console.log('A');
-                return target[prop];
+        let newObj = JSON.parse(JSON.stringify(obj));
+
+        Object.defineProperty(obj, 'name', {
+            get() {
+                return newObj.name;
             },
-            set(target, prop, value) {
-                // console.log('B');
-                target[prop] = value;
+            set(val) {
+                if (val === obj.name) return;
+                newObj.name = val;
                 observer();
-            }
+           }
         });
+
 
         function observer() {  
             spanName.innerHTML = obj.name;
             inpName.value = obj.name;
         }
+        observer();
 
         setTimeout(()=>{
             obj.name='zzz';
@@ -90,10 +50,52 @@
             obj.name=this.value;
         }
 
+        /*
+        1.需要对原始数据进行克隆
+        2.需要分别给对象中的每一个属性设置监听
+        3.深度监听，需要递归到底，一次性计算量很大
+        4.新增、删除属性监听不到(Vue.set  Vue.delete)
+        5.无法原生监听数组，需要特殊处理：重写了数组这些方法：
+        push pop shift unshift reverse sort slice
+        */
+    </script>
+    <script>
+        //vue3.0
+        // var spanName = document.getElementById('spanName'),
+        // inpName = document.getElementById('inpName');
+        // let obj = {};
+        // obj = new Proxy(obj, {
+        //     //target：监听的obj本身
+        //     //prop:属性
+        //     //value：属性的值
+        //     get(target, prop) {
+        //         // console.log('A');
+        //         return target[prop];
+        //     },
+        //     set(target, prop, value) {
+        //         // console.log('B');
+        //         target[prop] = value;
+        //         observer();
+        //     }
+        // });
+
+        // function observer() {  
+        //     spanName.innerHTML = obj.name;
+        //     inpName.value = obj.name;
+        // }
+
+        // setTimeout(()=>{
+        //     obj.name='zzz';
+        // },1000);
+
+        // //v-model
+        // inpName.oninput=function(){
+        //     obj.name=this.value;
+        // }
+
 
         /*
-        1.不需要对原始数据进行克隆，不需要分别给对象中的每一个属性设置监听
-
+        不需要对原始数据进行克隆，不需要分别给对象中的每一个属性设置监听
         */
     </script>
 </body>
