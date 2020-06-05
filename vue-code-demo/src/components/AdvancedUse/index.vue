@@ -15,9 +15,21 @@
     <!-- <SlotDemo :url="website.url">
             {{website.title}}
     </SlotDemo> -->
+
     <!-- <ScopedSlotDemo :url="website.url">
       <template v-slot="slotProps">{{slotProps.slotData.title}}</template>
     </ScopedSlotDemo> -->
+
+    <!-- 具名插槽 -->
+    <!-- <NameSlot>
+    <template v-slot:header>
+    <h1>将插入header slot中</h1>
+    </template>
+    <p>将插入到main slot 中，即未命名的slot</p>
+    <template v-slot:footer>
+    <h1>将插入footer slot中</h1>
+    </template>
+    </NameSlot> -->
 
     <!-- 动态组件 -->
     <!-- <component :is="NextTickName"/> -->
