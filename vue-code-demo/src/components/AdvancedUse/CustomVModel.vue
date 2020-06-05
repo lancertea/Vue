@@ -18,7 +18,7 @@ export default {
         event: 'change1'
     },
     props: {
-        text: String,
+        text1: String,
         default() {
             return ''
         }
