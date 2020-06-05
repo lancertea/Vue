@@ -5,6 +5,9 @@
         <!-- 有v-model,双向数据绑定，必须要有get()  set() -->
         <input v-model="double2"/>
         
+        <!-- 自增 -->
+        <p>name:{{fullName}}</p>
+        
     </div>
 </template>
 
@@ -12,7 +15,9 @@
 export default {
     data() {
         return {
-            num: 20
+            num: 20,
+            firstName:"Foo",
+            lastName:"Bar"
         }
     },
     computed: {
@@ -27,6 +32,16 @@ export default {
             },
             set(val) {
                 this.num = val/2
+            }
+        },
+        fullName:{
+            get(){
+            return this.firstName+" "+lastName
+            },
+            set(val){
+            var names=val.split(" ")
+            this.firstName=names[0]
+            this.lastName=names[names.length-1]
             }
         }
     }
