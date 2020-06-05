@@ -12,7 +12,7 @@
 //     props: {
 //         id:'div1'
 //         className:'container'
-//      }
+//      },
 //     children:[
 //         {
 //             tag:'p'
