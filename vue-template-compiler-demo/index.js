@@ -5,7 +5,7 @@ const template = `<p>{{message}}</p>`
 //this 就是 vue的实例  const vm =new Vue({...})
 // with(this){return createElement('p',[createTextVNode(toString(message))])}
 // h -> vnode
-// createElement -> vnode
+// _c -> createElement -> vnode
 
 //  表达式  表达式内部就是本身JS代码
 // const template = `<p>{{flag ? message : 'no message found'}}</p>`
@@ -22,6 +22,7 @@ const template = `<p>{{message}}</p>`
 //      {staticClass:"container",attrs:{"id":"div1"}},
 //      [
 //          _c('img',{attrs:{"src":imgUrl}})])}
+//属性是个字符串，动态属性是个变量
 
 // // 条件
 // const template = `
@@ -31,6 +32,7 @@ const template = `<p>{{message}}</p>`
 //     </div>
 // `
 // with(this){return _c('div',[(flag === 'a')?_c('p',[_v("A")]):_c('p',[_v("B")])])}
+//v-if  v-else  被编译成三元表达式
 
 // 循环
 // const template = `
@@ -39,6 +41,7 @@ const template = `<p>{{message}}</p>`
 //     </ul>
 // `
 // with(this){return _c('ul',_l((list),function(item){return _c('li',{key:item.id},[_v(_s(item.title))])}),0)}
+//列表：renderList  函数()  （给一个数组给一个函数，用函数遍历数组）
 
 // 事件
 // const template = `
