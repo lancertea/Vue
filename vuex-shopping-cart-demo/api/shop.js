@@ -24,3 +24,23 @@ export default {
     }, 100)
   }
 }
+
+/*
+数据结构设计：
+{productionList:[
+  {
+    id:1,
+    title:"商品1",
+    price:10
+  },
+  ...
+],
+cartList:[
+  {
+  id:1,
+  quantity:1
+  },
+  ...
+]
+}
+*/
