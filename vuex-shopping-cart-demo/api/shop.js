@@ -43,4 +43,19 @@ cartList:[
   ...
 ]
 }
+
+
+组件设计
+<App>管理所有数据 
+  <ProductionList>   商品列表
+      <ProductionListItem/>
+      <ProductionListItem/>
+      <ProductionListItem/>
+  </ProductionList> 
+  <CartList>         购物车列表和总价
+     <CartItem/>
+     <CartItem/>
+  </CartList>
+</App>
+     
 */
