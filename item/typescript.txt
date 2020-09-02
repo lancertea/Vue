@@ -1,0 +1,109 @@
+#void
+可以用 void 表示没有任何返回值的函数：
+------------------------------------------------
+function alertName(): void {
+    alert('My name is Tom');
+}
+------------------------------------------------
+
+#any
+任意值（Any）用来表示允许赋值为任意类型。声明一个变量为任意值之后，对它的任何操作，返回的内容的类型都是任意值。
+变量如果在声明的时候，未指定其类型，那么它会被识别为任意值类型
+如果定义的时候没有赋值，不管之后有没有赋值，都会被推断成 any 类型而完全不被类型检查
+------------------------------------------------
+let something;
+something = 'seven';
+something = 7;
+
+something.setName('Tom');
+等价于
+
+let something: any;
+something = 'seven';
+something = 7;
+
+something.setName('Tom');
+------------------------------------------------
+
+
+#联合类型
+联合类型（Union Types）表示取值可以为多种类型中的一种。
+------------------------------------------------
+let myFavoriteNumber: string | number;
+myFavoriteNumber = 'seven';
+myFavoriteNumber = 7;
+------------------------------------------------
+let myFavoriteNumber: string | number：允许 myFavoriteNumber 的类型是 string 或者 number，但是不能是其他类型。
+当 TypeScript 不确定一个联合类型的变量到底是哪个类型的时候，我们只能访问此联合类型的所有类型里共有的属性或方法
+------------------------------------------------
+let myFavoriteNumber: string | number;
+myFavoriteNumber = 'seven';
+console.log(myFavoriteNumber.length); // 5
+myFavoriteNumber = 7;
+console.log(myFavoriteNumber.length); // 编译时报错
+------------------------------------------------
+
+#interface
+使用接口（Interfaces）来定义对象的类型
+------------------------------------------------
+interface Person {
+    name: string;
+    age: number;
+}
+
+let tom: Person = {
+    name: 'Tom',
+    age: 25
+};
+------------------------------------------------
+赋值的时候，变量的形状必须和接口的形状保持一致。不能多也不能少
+
+
+#数组
+------------------------------------------------
+let fibonacci: number[] = [1, 1, 2, 3, 5];
+
+let fibonacci: Array<number> = [1, 1, 2, 3, 5];
+
+interface NumberArray {
+    [index: number]: number;
+}
+let fibonacci: NumberArray = [1, 1, 2, 3, 5];
+------------------------------------------------
+
+#类型断言
+类型断言（Type Assertion）可以用来手动指定一个值的类型。
+语法：  值 as 类型 或 <类型>值
+
+用途之一：将任何一个类型断言为 any
+------------------------------------------------
+const foo: number = 1;
+foo.length = 1;  //error TS2339: Property 'length' does not exist on type 'number'.
+
+window.foo = 1;  // error TS2339: Property 'foo' does not exist on type 'Window & typeof globalThis'.
+(window as any).foo = 1;
+------------------------------------------------
+类型断言只会影响 TypeScript 编译时的类型，类型断言语句在编译结果中会被删除
+
+#声明文件
+当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。
+声明文件必需以 .d.ts 为后缀
+
+
+#两种文件的混入方式
+js
+------------------------------------------------
+import xxxMixin from 'util/xxx（.js）';
+
+export default {
+        mixins: [xxxMixin]
+}
+------------------------------------------------
+
+ts
+------------------------------------------------
+import xxxMixin from '../common/mixin/index(.ts)';
+
+export default class extends Mixins(xxxMixin) {}
+------------------------------------------------
+
