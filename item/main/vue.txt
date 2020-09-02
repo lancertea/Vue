@@ -1,0 +1,105 @@
+【实战例子】
+#入口页面
+一般为index.html,css放<head>，script放<body>最下面,body内一般只有个div，提供vue挂载点
+------------------------------------------------
+<div id="app"></div>
+------------------------------------------------
+
+注：它们之间的关联是通过sfx.config.js配置的
+------------------------------------------------
+ // webpack 的入口配置
+    entry: {
+        app: [
+            './src/framework/main.ts'
+        ],
+        login: [
+            './src/framework/login.js'
+        ]
+        ...   
+    },
+// 入口html文件配置，由于是单页，一般只配置login.html, index.html即可
+htmlPluginOptions: [
+        {
+            // 生成的文件
+            filename: 'index.html',
+            title: PROJECT_NAME,
+            // 源文件
+            template: NODE_ENV === 'production' ? 'page/index_prod.html' : 'page/index_dev.html',
+        ...
+------------------------------------------------
+
+
+#入口文件
+main.js 程序入口文件，加载各种公共组件 render函数是渲染一个视图，然后提供给el挂载
+- 引入公共文件
+- 全局配置
+- 实例化vue
+------------------------------------------------
+new Vue({
+    el: '#app',
+    router,
+    store,
+    render: (h): VNode => h(App)
+});
+------------------------------------------------
+\src\framework\main.ts
+
+
+#App.Vue 页面入口文件，根组件
+- 导出根组件以便main.js使用
+------------------------------------------------
+<template>
+    <div class="app-container">
+        <div v-if="!$route.meta.fullScreen">
+            <header-bar></header-bar>
+
+            <div class="view-body clearfix" :class="viewBodyClass" :style="viewBodyStyle" ref="viewBody">
+                <router-view></router-view>
+            </div>
+        </div>
+        <div v-else>
+            <router-view></router-view>
+        </div>
+    </div>
+</template>
+------------------------------------------------
+\src\framework\app.vue
+
+
+router index.js 把准备好路由组件注册到路由里
+<router-link> 该标签是一个vue-router中已经内置的组件，它会被渲染成一个<a>标签
+[属性]
+to 用于指定跳转的路径
+tag 指定渲染成什么组件
+replace 不会留下history记录，所以指定replace的情况下，后退键返回不能返回到上一个页面中
+active-class 当<router-link>对应的路由匹配成功时，会自动给当前元素设置一个router-link-active的class
+
+<router-view> 该标签会根据当前的路径，动态渲染出不同的组件。在路由切换时，切换的是<router-view>挂载的组件，其他内容不会发生改变
+
+
+#props
+------------------------------------------------
+<div class="a" >
+    <testb :child-name="parentName" ></testb>
+</div>
+------------------------------------------------
+
+------------------------------------------------
+new Vue({    
+    el:".a",        
+    name:"A",    
+    components:{        
+        testb:{            
+            props:{                
+                childName:""
+            },            
+        template: '<p>父组件传入的 props 的值 {{childName}}</p>',
+        }
+    },
+    data(){        
+        return {            
+            parentName:"我是父组件"
+        }
+    },
+})
+------------------------------------------------
