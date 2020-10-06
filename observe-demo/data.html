@@ -21,7 +21,7 @@
         };
         var spanName = document.getElementById('spanName'),
         inpName = document.getElementById('inpName');
-        let newObj = JSON.parse(JSON.stringify(obj));
+        let newObj = JSON.parse(JSON.stringify(obj));//避免死循环
 
         Object.defineProperty(obj, 'name', {
             get() {
