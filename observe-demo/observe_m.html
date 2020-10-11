@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>实现观察者模式</title>
+</head>
+
+<body>
+    <script>
+        class Observer {
+            constructor(subject) {
+                this.subject = subject;
+            }
+            notify() {
+                console.log(`对${this.subject}感兴趣的你收到一条房东的消息`);
+            }
+        }
+
+        class Subject {
+            // 根据户型的不同收集相应的订阅者
+            constructor() {
+                this.subjectList = {};
+            }
+            // 订阅
+            add(subject, observer) {
+                if (!this.subjectList[subject]) {
+                    this.subjectList[subject] = [];
+                }
+                this.subjectList[subject].push(observer);
+            }
+            // 解除订阅
+            remove(subject, observer) {
+                this.subjectList[subject].forEach((item, index) => {
+                    if (item === observer) {
+                        this.subjectList[subject].splice(index, 1);
+                    }
+                });
+            }
+            // 触发事件
+            fire(subject) {
+                this.subjectList[subject].forEach((item) => item.notify());
+            }
+        }
+
+        // 有ABC...等不同的租客对不同的房型感兴趣
+        const observerA = new Observer("bigHouse"); // 我对超大house感兴趣
+        const observerB = new Observer("mediumHouse"); // 我求个中等
+        const observerC = new Observer("smallHouse"); // 我穷逼。。。
+
+        // 先new个房东吧
+        const subjects = new Subject();
+        // 房东在加ABC微信的时候就对他们分好了组：
+        subjects.add("bigHouse", observerA);
+        subjects.add("mediumHouse", observerB);
+        subjects.add("smallHouse", observerC);
+
+        // 某一天
+        subjects.fire("bigHouse"); // 对bigHouse感兴趣的你收到一条房东的消息
+        // 又某一天
+        subjects.fire("mediumHouse"); // 对mediumHouse感兴趣的你收到一条房东的消息
+        // 再某一天
+        subjects.fire("smallHouse"); // 对smallHouse感兴趣的你收到一条房东的消息
+    </script>
+</body>
+
+</html>

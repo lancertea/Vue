@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>发布订阅模式</title>
+</head>
+
+<body>
+    <script>
+        class EventBus {
+            constructor() {
+                // 定义事件池
+                // 数据结构应该长这样：{<某主题>:<该主题下要执行的事件队列>}
+                // {'subject': ['func1','func2','func3']}
+                this.events = {};
+            }
+
+            /**
+             * 订阅
+             * @param {主题} subject
+             * @param {主题相关函数} func
+             */
+            on(subject, func) {
+                if (!this.events[subject]) {
+                    this.events[subject] = [];
+                }
+                this.events[subject].push(func);
+            }
+
+            /**
+             * 发布
+             * @param {主题} subject
+             */
+            emit(subject) {
+                if (!this.events[subject]) {
+                    return;
+                }
+                this.events[subject].forEach((item) => {
+                    item(); // 执行该主题下与之相关的函数队列
+                });
+            }
+
+            /**
+             * 删除
+             * @param {主题} subject
+             */
+            remove(subject) {
+                if (this.events[subject]) {
+                    delete this.events[subject];
+                }
+            }
+        }
+
+        const bus = new EventBus();
+
+        // 不同租客订阅了不同需求房型
+        bus.on("bigHouse", function () {
+            console.log("对bigHouse感兴趣的你收到一条房东的消息");
+        });
+
+        bus.on("mediumHouse", function () {
+            console.log("对mediumHouse感兴趣的你收到一条房东的消息");
+        });
+
+        bus.on("smallHouse", function () {
+            console.log("对smallHouse感兴趣的你收到一条房东的消息");
+        });
+
+        // 某天房东通过中介发布了一条消息
+        bus.emit("bigHouse"); //对bigHouse感兴趣的你收到一条房东的消息
+        // 又某一天
+        bus.emit("mediumHouse"); // 对mediumHouse感兴趣的你收到一条房东的消息
+        // 再某一天。。。。
+        bus.emit("smallHouse"); // 对smallHouse感兴趣的你收到一条房东的消息
+    </script>
+</body>
+
+</html>
+</script>
+</body>
+
+</html>
