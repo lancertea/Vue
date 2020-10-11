@@ -7,6 +7,9 @@
         
         <!-- 自增 -->
         <p>name:{{fullName}}</p>
+        <!-- computed 通过 watcher.dirty 控制是否读取缓存
+             computed 会让 【data依赖】 收集到 【依赖computed的watcher】，
+             从而 data 变化时，会同时通知 computed 和 依赖computed的地方 -->
         
     </div>
 </template>

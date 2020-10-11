@@ -6,6 +6,8 @@
 </template>
 
 <script>
+/*当 watch.getter 执行，而读取了 vm.name 的时候，name的依赖收集器就会收集到watch的watcher
+监听的数据变化的时候，就能通知 watch-watcher 更新，所谓通知更新，就是手动调用 watch.update*/
 export default {
     data() {
         return {
