@@ -2,7 +2,7 @@
 ## 安装git 
 自行谷歌
 
-安装完成后需要设置用户名和邮箱，以下加了--global参数表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
+安装完成后需要设置用户名和邮箱，以下加了--global参数表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址(这里用户名和邮箱对应你github/gitlab上的账号才正确)。
 ```shell
  git config --global user.name "Your Name"
  git config --global user.email "email@example.com"
