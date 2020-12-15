@@ -210,7 +210,7 @@ git reflog
 ```shell
 git log  
 ```
-
+byte dancer:
 Master:   
 个人开发分支feature  bugfix，开发无误后会删除feature
 当完成一个阶段性任务后，需要发版，这个版本会基于master切一个release分支，同时这个版本会交给测试测，在测的过程中发现问题，基于release分支改动，最终没问题，发布，改动也会合入master,同时这个release分支保留
